@@ -1,10 +1,22 @@
 import { loadRemoteModule } from '@angular-architects/native-federation';
 import { Routes } from '@angular/router';
+import { Fallback } from './components/fallback/fallback';
 
 export const routes: Routes = [
   {
-    path: '',
+    path: 'test',
     loadComponent: () =>
-      loadRemoteModule('remote', './Component').then((m) => m.App),
+      loadRemoteModule('remote', './Component')
+        .then((m) => m.App)
+        .catch((error) => {
+          console.error('Error loading remote component', error);
+          return Fallback;
+        }),
+  },
+  {
+    path: 'flights',
+    // loadChildreas instead of loadComponent !!!
+    loadChildren: () =>
+      loadRemoteModule('remote', './routes').then((m) => m.APP_ROUTES),
   },
 ];
