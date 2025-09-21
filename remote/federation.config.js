@@ -1,3 +1,5 @@
+// remote/federation.config.js
+
 const { withNativeFederation, shareAll } = require('@angular-architects/native-federation/config');
 
 module.exports = withNativeFederation({
@@ -6,6 +8,7 @@ module.exports = withNativeFederation({
 
   exposes: {
     './Component': './src/app/app.ts',
+    './CounterComponent': './src/app/components/counter/counter.component.ts',
   },
 
   shared: {
