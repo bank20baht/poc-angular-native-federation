@@ -1,3 +1,16 @@
-import { Routes } from '@angular/router';
+// remote/src/app/app.routes.ts
 
-export const routes: Routes = [];
+import { Routes } from '@angular/router';
+import { CounterComponent } from './components/counter/counter.component';
+import { CalculatorComponent } from './components/calculator/calculator.component';
+
+export const routes: Routes = [
+  {
+    path: 'counter',
+    component: CounterComponent,
+  },
+  {
+    path: 'calculator',
+    component: CalculatorComponent,
+  },
+];
