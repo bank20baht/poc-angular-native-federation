@@ -9,7 +9,8 @@ module.exports = withNativeFederation({
   exposes: {
     './Component': './src/app/app.ts',
     './CounterComponent': './src/app/components/counter/counter.component.ts',
-    './AppRoutes': './src/app/app.routes.ts', // here
+    './AppRoutes': './src/app/app.routes.ts',
+    './CardComponent': './src/app/components/card/card.component.ts',
   },
 
   shared: {
