@@ -1,6 +1,6 @@
 // remote/src/app/components/card/card.component.ts
 
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'remote-card',
@@ -11,4 +11,10 @@ import { Component, Input } from '@angular/core';
 export class CardComponent {
   @Input() title: string = '';
   @Input() content: string = '';
+
+  @Output() cardOutput = new EventEmitter<string>();
+
+  onCardClick() {
+    this.cardOutput.emit('Card clicked!');
+  }
 }
