@@ -10,6 +10,7 @@ import {
 import { RouterOutlet } from '@angular/router';
 import { loadRemoteModule } from '@angular-architects/native-federation';
 import { FallbackComponent } from './components/fallback/fallback.component';
+import { RemoteCardWrapperComponent } from './mfe-adapters';
 
 export type ICardComponent = {
   title: string;
@@ -19,40 +20,17 @@ export type ICardComponent = {
 
 @Component({
   selector: 'host-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, RemoteCardWrapperComponent],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
 export class App {
   protected readonly title = signal('host');
 
-  @ViewChild('container', { read: ViewContainerRef })
-  container!: ViewContainerRef;
+  cardTitle = 'Text from Host (Native Federation)';
+  cardContent = 'Angular 20 Microfrontend Native Federation 🚀';
 
-  async ngAfterViewInit() {
-    this.container.clear();
-
-    try {
-      const Card = await loadRemoteModule({
-        remoteEntry: 'http://localhost:4201/remoteEntry.json',
-        remoteName: 'remote',
-        exposedModule: './CardComponent',
-      });
-
-      const cardComponentRef = this.container.createComponent<ICardComponent>(
-        Card.CardComponent
-      );
-
-      cardComponentRef.instance.title = 'Text from Host (Native Federation)';
-      cardComponentRef.instance.content =
-        'Angular 20 Microfrontend Native Federation 🚀';
-
-      cardComponentRef.instance.cardOutput.subscribe((message: string) => {
-        alert(`Message from Remote: ${message}`);
-      });
-    } catch (err) {
-      console.error('❌ Remote component load failed:', err);
-      this.container.createComponent(FallbackComponent);
-    }
+  handleClickCardButton(event: string) {
+    alert(`Message from Remote: ${event}`);
   }
 }

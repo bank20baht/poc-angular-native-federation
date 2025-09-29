@@ -263,6 +263,6 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<ng-template #container></ng-template>
+<host-remote-card-wrapper [title]="cardTitle" [content]="cardContent" (cardOutput)="handleClickCardButton($event)" />
 
 <router-outlet />
